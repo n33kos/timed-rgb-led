@@ -33,9 +33,9 @@ unsigned int durationInSeconds = 0;
 
 unsigned int gradientDurationMilliSeconds = 0;
 unsigned int gradientDurationSeconds = 0;
-unsigned int gradientDurationMinutes = 2;
+unsigned int gradientDurationMinutes = 0;
 unsigned int gradientDurationHours = 0;
-unsigned int gradientDurationDays = 0;
+unsigned int gradientDurationDays = 2;
 unsigned int gradientDurationInSeconds = gradientDurationSeconds + (gradientDurationMinutes * 60) + (gradientDurationHours * 60 * 60) + (gradientDurationDays * 60 * 60 * 24);
 
 void setup()
@@ -89,7 +89,7 @@ SIGNAL(TIMER0_COMPA_vect) {
   // this gets called every 2 milliseconds
   counter += 2;
 
-  //Refresh servo and count milliseconds every 20 milliseconds
+  //count milliseconds every 20 milliseconds
   if (counter >= 20) {
     counter = 0;
     milliseconds = milliseconds + 20;
