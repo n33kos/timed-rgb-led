@@ -24,22 +24,23 @@ int gradientLength = 11 - 1;
 int activeColorIndex = 0;
 
 volatile uint8_t counter = 0;
-unsigned int milliseconds = 0;
-unsigned int seconds = 0;
-unsigned int minutes = 0;
-unsigned int hours = 0;
-unsigned int days = 0;
-unsigned int durationInSeconds = 0;
+unsigned long milliseconds = 0;
+unsigned long seconds = 0;
+unsigned long minutes = 0;
+unsigned long hours = 0;
+unsigned long days = 0;
+unsigned long durationInSeconds = 0;
 
-unsigned int gradientDurationMilliSeconds = 0;
-unsigned int gradientDurationSeconds = 0;
-unsigned int gradientDurationMinutes = 0;
-unsigned int gradientDurationHours = 0;
-unsigned int gradientDurationDays = 2;
-unsigned int gradientDurationInSeconds = gradientDurationSeconds + (gradientDurationMinutes * 60) + (gradientDurationHours * 60 * 60) + (gradientDurationDays * 60 * 60 * 24);
+unsigned long gradientDurationMilliSeconds = 0;
+unsigned long gradientDurationSeconds = 0;
+unsigned long gradientDurationMinutes = 0;
+unsigned long gradientDurationHours = 0;
+unsigned long gradientDurationDays = 2;
+unsigned long gradientDurationInSeconds = gradientDurationSeconds + (gradientDurationMinutes * 60) + (gradientDurationHours * 60 * 60) + (gradientDurationDays * 60 * 60 * 24);
 
 void setup()
 {
+  OCR0A = 0xAF;         // any number is OK
   TIMSK |= _BV(OCIE0A); // Turn on the compare interrupt (below!)
 
   pinMode(redPin, OUTPUT);
@@ -50,7 +51,7 @@ void setup()
 void loop()
 {
   // Get current duration in seconds
-  durationInSeconds = seconds + (minutes * 60) + (hours * 60 * 60) + (days * 60 * 60 * 24);
+  unsigned long durationInSeconds = seconds + (minutes * 60) + (hours * 60 * 60) + (days * 60 * 60 * 24);
   
   // Get completion percentage
   double completionPercentage = (double) durationInSeconds / gradientDurationInSeconds;
